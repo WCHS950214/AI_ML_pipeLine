@@ -42,12 +42,13 @@
 4. ssh `twccli ls ccs -s $CCS_ID -gssh` `nvidia-smi`
 ## Lab 5
 1. sudo apt install jp
-2. twccli ls key -json | jq '.[].name '| paste -sd " " -
-3. twccli ls ccs -s $CCS_ID -p -json | jq"."
-4. twccli net ccs -s $CCS_ID -p 5000 -open
+2. twccli ls key -json | jq '.[].name' | paste -sd " "
+3. twccli ls key -json | jq '.[] | select(.name|startswith(“$KEYNAME”)).name' | xargs twccli rm key -f
+4. twccli ls key -json | jq '.[].name '| paste -sd " " -
 5. twccli ls ccs -s $CCS_ID -p -json | jq"."
-6. twccli ls ccs -s $CCS_ID -p -json | jq ".[] | select (.target_port| contains(5000) ) "
+6. twccli net ccs -s $CCS_ID -p 5000 -open
+7. twccli ls ccs -s $CCS_ID -p -json | jq"."
+8. twccli ls ccs -s $CCS_ID -p -json | jq ".[] | select (.target_port| contains(5000) ) "
 ## Lab 6
 1. wget https://gist.githubusercontent.com/NCHC-Oliver/2b95ea9d2530d3a4048a69245a10ae03/raw/b6ba6cf0516daa3c1b8973c1a39fb78908f4474c/TWCC_IaC.sh
 2. bash TWCC_LaC.sh 
-ㄈ
